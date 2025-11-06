@@ -1,0 +1,45 @@
+*{
+    font-family: "Jua", sans-serif;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #ffffff;
+    border-top: 1px solid #d6d9de;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 8px 0;
+    box-sizing: border-box;
+}
+
+footer button {
+    background: #e4e9f0;
+    border: none;
+    border-radius: 12px;
+    width: 90px;
+    height: 48px;
+    font-size: 14px;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+
+footer button:hover {
+    background: #d7dee7;
+}
+
+footer button:active {
+    transform: scale(0.96);
+}
+
+.icon {
+    font-size: 18px;
+}
