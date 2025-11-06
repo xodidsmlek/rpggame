@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Footer from './components/common/Footer'
 import Ability from './components/Ability'
+import Battle from './components/Battle'
 import './assets/styles/css/App.css'
 
 function App() {
@@ -14,17 +15,11 @@ function App() {
   const mainScreen = () =>{
     switch(menu){
       case "main":
-        return(
-          <></>
-        )
+        return(<></>)
       case "battle":
-        return(
-          <></>
-        )
+        return(<Battle/>)
       case "ability":
-        return(
-          <><Ability/></>
-        )
+        return(<Ability/>)
       case "skill":
         return(
           <></>
