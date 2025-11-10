@@ -12,6 +12,7 @@ function battle() {
     const [ curExp,setCurExp ] = useState(0);
     const [ maxExp,setMaxExp ] = useState(5);
 
+    /* Battle */
     useEffect(()=>{
         if(playerHp==0) return;
 
@@ -31,11 +32,18 @@ function battle() {
         };
     },[playerHp]);
 
+    /* Level up */
+    useEffect(()=>{
+        if(maxExp > curExp) return;
+
+        setMaxExp(maxExp * 1.1);
+    },[curExp]);
+
     return(
         <>
             <div>적 HP : {enemyHp}</div>
             <div>HP : {playerHp}</div>
-            <div>현재 경험치 : {curExp}</div>
+            <div>현재 경험치 : {curExp}/{maxExp}</div>
         </>
     )
 }

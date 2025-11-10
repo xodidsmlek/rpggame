@@ -40,6 +40,13 @@ function Footer({menu,setMenu}) {
                         <button onClick={() => setMenu("main")}     >처음</button>
                     </>
                 );
+
+             case "battle":
+                return(
+                    <>
+                        <button onClick={() => setMenu("main")}     >포기</button>
+                    </>
+                );
             
             default :
                 return null;
