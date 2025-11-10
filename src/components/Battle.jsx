@@ -1,8 +1,8 @@
 import { useState,useEffect } from "react";
 
 function battle() {
-    const [ enemyHp,setEnemyHp ] = useState(10);
-    const [ maxEnemyHp,setMaxEnemyHp ] = useState(10);
+    const [ enemyHp,setEnemyHp ] = useState(0);
+    const [ maxEnemyHp,setMaxEnemyHp ] = useState(2);
     const [ enemyAttack,setEnemyAttack ] = useState(1);
         
     const [ playerHp,setPlayerHp ] = useState(15);
@@ -12,31 +12,42 @@ function battle() {
     const [ curExp,setCurExp ] = useState(0);
     const [ maxExp,setMaxExp ] = useState(5);
 
-    /* Battle */
+    /* BattleSystem */
     useEffect(()=>{
-        if(playerHp==0) return;
-
-        if(enemyHp==0){
-            setCurExp(curExp+enemyAttack);
-            setMaxEnemyHp(maxEnemyHp*1.1);
-            setEnemyHp(enemyHp+maxEnemyHp);
-            setEnemyAttack(enemyAttack+1);
-        }
         const battling = setInterval(()=>{
-            setEnemyHp(enemyHp-playerAttack);
-            setPlayerHp(playerHp-enemyAttack);
+            setEnemyHp(prev=>prev-playerAttack);
+            setPlayerHp(prev=>prev-enemyAttack);
         },500);
 
         return () => {
             clearInterval(battling);
         };
-    },[playerHp]);
+    },[]);
+
+    /* BattleResult */
+    useEffect(()=>{
+        if(playerHp<1) return;
+
+        if(enemyHp<1){
+            setCurExp(prev=>prev+enemyAttack);
+            setEnemyAttack(prev=>prev+1);
+            setMaxEnemyHp(prev=>{
+                const max = prev*1.1;
+                setEnemyHp(Math.floor(max));
+                return max;
+            });
+        }
+    },[playerHp,enemyHp]);
 
     /* Level up */
     useEffect(()=>{
         if(maxExp > curExp) return;
-
-        setMaxExp(maxExp * 1.1);
+        setCurExp(prev=>{
+            return Math.floor(prev-maxExp);
+        })
+        setMaxExp(prev=>Math.ceil(prev*1.1));
+        setPlayerHp(playerHp+5);
+        setPlayerAttack(playerAttack+1);
     },[curExp]);
 
     return(
